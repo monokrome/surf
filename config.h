@@ -114,7 +114,6 @@ static SiteSpecific certs[] = {};
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO", PROMPT_GO) },
-	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND", PROMPT_FIND) },
 
 	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
@@ -123,22 +122,20 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
 	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 
-	{ MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
-	{ MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
+	{ MODKEY,                GDK_KEY_i,      navigate,   { .i = +1 } },
+	{ MODKEY,                GDK_KEY_o,      navigate,   { .i = -1 } },
 
 	{ MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
 	{ MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
-	{ MODKEY,                GDK_KEY_b,      scroll,     { .i = 'U' } },
+	{ GDK_SHIFT_MASK,        GDK_KEY_space,  scroll,     { .i = 'U' } },
 	{ MODKEY,                GDK_KEY_space,  scroll,     { .i = 'D' } },
-	{ MODKEY,                GDK_KEY_i,      scroll,     { .i = 'r' } },
-	{ MODKEY,                GDK_KEY_u,      scroll,     { .i = 'l' } },
+	{ MODKEY,                GDK_KEY_l,      scroll,     { .i = 'r' } },
+	{ MODKEY,                GDK_KEY_h,      scroll,     { .i = 'l' } },
 
 
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_q,      zoom,       { .i = 0  } },
+	{ MODKEY,                GDK_KEY_0,      zoom,       { .i = 0  } },
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
-	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
+	{ MODKEY,                GDK_KEY_equal,  zoom,       { .i = +1 } },
 
 	{ MODKEY,                GDK_KEY_p,      clipboard,  { .i = 1 } },
 	{ MODKEY,                GDK_KEY_y,      clipboard,  { .i = 0 } },
@@ -151,7 +148,7 @@ static Key keys[] = {
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },
 	{ 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_o,      toggleinspector, { 0 } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_u,      toggleinspector, { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      toggle,     { .i = CaretBrowsing } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
