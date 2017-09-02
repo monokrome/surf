@@ -122,8 +122,8 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .i = 1 } },
 	{ MODKEY,                GDK_KEY_r,      reload,     { .i = 0 } },
 
-	{ MODKEY,                GDK_KEY_i,      navigate,   { .i = +1 } },
-	{ MODKEY,                GDK_KEY_o,      navigate,   { .i = -1 } },
+	{ MODKEY,                GDK_KEY_i,      navigate,   { .i = -1 } },
+	{ MODKEY,                GDK_KEY_o,      navigate,   { .i = +1 } },
 
 	{ MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
 	{ MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
@@ -148,7 +148,7 @@ static Key keys[] = {
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },
 	{ 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_u,      toggleinspector, { 0 } },
+	{ 0,                     GDK_KEY_F12,      toggleinspector, { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      toggle,     { .i = CaretBrowsing } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_f,      toggle,     { .i = FrameFlattening } },
