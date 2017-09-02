@@ -94,6 +94,11 @@ typedef struct {
 	int prio;
 } Parameter;
 
+typedef struct {
+	char *token;
+	char *uri;
+} SearchEngine;
+
 typedef struct Client {
 	GtkWidget *win;
 	WebKitWebView *view;
@@ -206,6 +211,9 @@ static void responsereceived(WebKitDownload *d, GParamSpec *ps, Client *c);
 static void download(Client *c, WebKitURIResponse *r);
 static void closeview(WebKitWebView *v, Client *c);
 static void destroywin(GtkWidget* w, Client *c);
+
+/* Search engines */
+static gchar* parseuri(const gchar *uri);
 
 /* Hotkeys */
 static void pasteuri(GtkClipboard *clipboard, const char *text, gpointer d);
@@ -536,7 +544,7 @@ loaduri(Client *c, const Arg *a)
 		url = g_strdup_printf("file://%s", path);
 		free(path);
 	} else {
-		url = g_strdup_printf("http://%s", uri);
+		url = parseuri(uri);
 	}
 
 	setatom(c, AtomUri, url);
@@ -1342,10 +1350,6 @@ createwindow(Client *c)
 	} else {
 		w = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
-		wmstr = g_path_get_basename(argv0);
-		gtk_window_set_wmclass(GTK_WINDOW(w), wmstr, "Surf");
-		g_free(wmstr);
-
 		wmstr = g_strdup_printf("%s[%lu]", "Surf",
 		        webkit_web_view_get_page_id(c->view));
 		gtk_window_set_role(GTK_WINDOW(w), wmstr);
@@ -1680,6 +1684,22 @@ destroywin(GtkWidget* w, Client *c)
 	destroyclient(c);
 	if (!clients)
 		gtk_main_quit();
+}
+
+static gchar*
+parseuri(const gchar *uri)
+{
+	guint i;
+
+	for (i = 0; i < LENGTH(searchengines); ++i) {
+		if (searchengines[i].token == NULL || searchengines[i].uri == NULL || *(uri + strlen(searchengines[i].token)) != ' ')
+			continue;
+
+		if (g_str_has_prefix(uri, searchengines[i].token))
+			return g_strdup_printf(searchengines[i].uri, uri+strlen(searchengines[i].token) + 1);
+	}
+
+	return g_strdup_printf("http://%s", uri);
 }
 
 void
@@ -2030,10 +2050,12 @@ main(int argc, char *argv[])
 	default:
 		usage();
 	} ARGEND;
+
+
 	if (argc > 0)
 		arg.v = argv[0];
 	else
-		arg.v = "about:blank";
+		arg.v = homepage;
 
 	setup();
 	c = newclient(NULL);
