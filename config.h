@@ -1,7 +1,7 @@
 /* modifier 0 means no modifier */
 static int  surfuseragent   = 0;
 static char *homepage       = "https://duckduckgo.com/";
-static char *fulluseragent  = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9) AppleWebKit/537.71 (KHTML, like Gecko) Version/7.0 Safari/537.71";
+static char *fulluseragent  = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_90) AppleWebKit/602.4.8 (KHTML, like Gecko) Version/10.0.3 Safari/602.4.8";
 static char *scriptfile     = "~/.config/surf/script.js";
 static char *styledir       = "~/.config/surf/styles/";
 static char *certdir        = "~/.config/surf/certificates/";
