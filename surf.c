@@ -1692,7 +1692,13 @@ parseuri(const gchar *uri)
 	guint i;
 
 	for (i = 0; i < LENGTH(searchengines); ++i) {
-		if (searchengines[i].token == NULL || searchengines[i].uri == NULL || *(uri + strlen(searchengines[i].token)) != ' ')
+		if (searchengines[i].token == NULL || searchengines[i].uri == NULL)
+			continue;
+
+		if (strlen(uri) == strlen(searchengines[i].token))
+			return g_strdup_printf(searchengines[i].uri, "");
+
+		if (*(uri + strlen(searchengines[i].token)) != ' ')
 			continue;
 
 		if (g_str_has_prefix(uri, searchengines[i].token))
