@@ -1705,7 +1705,7 @@ parseuri(const gchar *uri)
 			return g_strdup_printf(searchengines[i].uri, uri+strlen(searchengines[i].token) + 1);
 	}
 
-	return g_strdup_printf("http://%s", uri);
+	return g_strdup_printf(searchengines[0].uri, uri);
 }
 
 void
