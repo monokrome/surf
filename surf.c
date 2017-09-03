@@ -1694,13 +1694,13 @@ static gboolean isuri(const gchar *uri) {
 	for (i = 0; i < strlen(uri); ++i) {
 		if (uri[i] == ' ') break;
 		if (uri[i] == '/' && !foundDot) break;
-		if (foundDot) break;
+		if (foundDot) return TRUE;
 		if (uri[i] != '.') continue;
 
 		foundDot = TRUE;
 	}
 
-	return foundDot;
+	return FALSE;
 }
 
 static gchar*
