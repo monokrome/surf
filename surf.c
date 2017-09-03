@@ -213,6 +213,7 @@ static void closeview(WebKitWebView *v, Client *c);
 static void destroywin(GtkWidget* w, Client *c);
 
 /* Search engines */
+static gboolean isuri(const gchar *uri);
 static gchar* parseuri(const gchar *uri);
 
 /* Hotkeys */
@@ -1686,6 +1687,22 @@ destroywin(GtkWidget* w, Client *c)
 		gtk_main_quit();
 }
 
+static gboolean isuri(const gchar *uri) {
+	guint i;
+	gboolean foundDot = FALSE;
+
+	for (i = 0; i < strlen(uri); ++i) {
+		if (uri[i] == ' ') break;
+		if (uri[i] == '/' && !foundDot) break;
+		if (foundDot) break;
+		if (uri[i] != '.') continue;
+
+		foundDot = TRUE;
+	}
+
+	return foundDot;
+}
+
 static gchar*
 parseuri(const gchar *uri)
 {
@@ -1705,7 +1722,11 @@ parseuri(const gchar *uri)
 			return g_strdup_printf(searchengines[i].uri, uri+strlen(searchengines[i].token) + 1);
 	}
 
-	return g_strdup_printf(searchengines[0].uri, uri);
+	if (!isuri(uri)) {
+		return g_strdup_printf(searchengines[0].uri, uri);
+	}
+
+	return g_strdup_printf("https://%s", uri);
 }
 
 void
