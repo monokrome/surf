@@ -59,6 +59,7 @@ static UriParameters uriparams[] = {
 
 static SearchEngine searchengines[] = {
 	{"ddg", "https://duckduckgo.com/?q=%s"},
+	{"wiki", "https://www.wikipedia.org/wiki/Special:Search?search=%s"},
 };
 
 /* default window size: width, height */
