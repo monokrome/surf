@@ -1709,7 +1709,7 @@ static gboolean isuri(const gchar *uri) {
 		foundDot = TRUE;
 	}
 
-	return FALSE;
+	return postDotCharacters > 1;
 }
 
 static gchar*
