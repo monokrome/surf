@@ -200,3 +200,10 @@ static Button buttons[] = {
 	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
 };
+
+static const char *httpsSites[] = {
+
+	"reddit.com",
+	"imgur.com",
+};
+
