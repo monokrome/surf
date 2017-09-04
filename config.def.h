@@ -1,4 +1,5 @@
 /* modifier 0 means no modifier */
+static char *homepage       = "about:blank"; /* Set a homepage */
 static int surfuseragent    = 1;  /* Append Surf version to default WebKit user agent */
 static char *fulluseragent  = ""; /* Or override the whole user agent string */
 static char *scriptfile     = "~/.surf/script.js";
@@ -54,6 +55,11 @@ static UriParameters uriparams[] = {
 	  [JavaScript] = { { .i = 0 }, 1 },
 	  [Plugins]    = { { .i = 0 }, 1 },
 	}, },
+};
+
+static SearchEngine searchengines[] = {
+	{"ddg", "https://duckduckgo.com/?q=%s"},
+	{"wiki", "https://www.wikipedia.org/wiki/Special:Search?search=%s"},
 };
 
 /* default window size: width, height */
