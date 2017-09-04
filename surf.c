@@ -1689,13 +1689,19 @@ destroywin(GtkWidget* w, Client *c)
 
 static gboolean isuri(const gchar *uri) {
 	guint i;
+
 	gboolean foundDot = FALSE;
+	guint postDotCharacters = 0;
 
 	for (i = 0; i < strlen(uri); ++i) {
 		if (uri[i] == ' ') break;
 		if (uri[i] == '/' && !foundDot) break;
-		if (foundDot) return TRUE;
-		if (uri[i] != '.') continue;
+		if (postDotCharacters > 1) return TRUE;
+
+		if (uri[i] != '.') {
+			if (foundDot) ++postDotCharacters;
+			continue;
+		}
 
 		foundDot = TRUE;
 	}
