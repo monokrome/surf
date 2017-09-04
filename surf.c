@@ -536,8 +536,12 @@ loaduri(Client *c, const Arg *a)
 	if (g_strcmp0(uri, "") == 0)
 		return;
 
-	if (g_str_has_prefix(uri, "http://")  ||
-	    g_str_has_prefix(uri, "https://") ||
+	// Force HTTPS
+	if (g_str_has_prefix(uri, "http://")) {
+		uri = g_strdup_printf("https://%s", uri+7);
+	}
+
+	if (g_str_has_prefix(uri, "https://") ||
 	    g_str_has_prefix(uri, "file://")  ||
 	    g_str_has_prefix(uri, "about:")) {
 		url = g_strdup(uri);
